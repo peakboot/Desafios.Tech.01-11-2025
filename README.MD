@@ -185,7 +185,7 @@ Acesse o **Dashboard (Frontend)** em:
 | [DataBase](./DataBase) | Contém a configuração do banco de dados e o docker-compose.yml responsável por subir o PostgreSQL e gerar os dados automaticamente. |
 | [backend](./backend) | Código-fonte do backend (NestJS), incluindo regras de negócio, serviços e rotas da API REST. |
 | [FrontEnd](./FAQ.md) | Código-fonte do frontend (React + Vite), onde o usuário interage com o sistema através da interface.|
-| [DECISOES_ARQUITETURAIS.md](./DECISOES_ARQUITETURAIS.md.md) | Detalha as principais escolhas de arquitetura do projeto, abordando as justificativas das tecnologias e tecnicas adotadas. |
+| [DECISOES_ARQUITETURAIS.md](./DECISOES_ARQUITETURAIS.md) | Detalha as principais escolhas de arquitetura do projeto, abordando as justificativas das tecnologias e tecnicas adotadas. |
 
 
 
