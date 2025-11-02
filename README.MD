@@ -188,4 +188,11 @@ Acesse o **Dashboard (Frontend)** em:
 | [DECISOES_ARQUITETURAIS.md](./DECISOES_ARQUITETURAIS.md) | Detalha as principais escolhas de arquitetura do projeto, abordando as justificativas das tecnologias e tecnicas adotadas. |
 
 
+## 🎬 Vídeo de Apresentação  
+Assista o vídeo completo de demostração do projeto clicando no link abaixo:  
+[▶ Ver vídeo no Google Drive](https://drive.google.com/file/d/1kZE2cslQ4wAqbuczA5bQITeZs6howXo2/view?usp=sharing)
+
+---
+Feito com ❤️ por **@domcarlosadriano**
+
 
